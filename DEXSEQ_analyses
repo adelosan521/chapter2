@@ -13,20 +13,12 @@ dxd = DEXSeqDataSetFromHTSeq(countFiles, sampleData=sampleTable, design=~sample 
 dim(dxd)
 dxd=estimateSizeFactors(dxd)
 
+##Generate normalized counts for DEU file
+
 test<-counts(dxd, normalized=T)
 write.table(test, file="/t1-data/user/aangeles/fastaq_files/revisedcounts2/normalized_counts_DEXSeq.txt", sep="\t",  row.names = TRUE, col.names = TRUE)
 
-
-dxd2<-dxd[grep("ENSG00000151067", rownames(dxd)), ]
-dim(dxd2)
-dxd2=estimateDispersions(dxd2, BPPARAM=MulticoreParam(workers=16))
-dxd2=testForDEU(dxd2, BPPARAM=MulticoreParam(workers=16))
-dxd2=estimateExonFoldChanges(dxd2, fitExpToVar="condition", BPPARAM=MulticoreParam(workers=16))
-drx1=DEXSeqResults(dxd2)
-head(drx1)
-write.table(drx1, file="/t1-data/user/aangeles/fastaq_files/revisedcounts2/test_DEU_ENSG00000151067.txt", sep="\t", quote=F, row.names = TRUE, col.names = TRUE)
-
-##Plotting of individual genes
+##Make table for VGCC subunit DEU and plotting of individual genes
 
 dxd2<-dxd[grep("ENSG00000151067", rownames(dxd)), ]
 dim(dxd2)
