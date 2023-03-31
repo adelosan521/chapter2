@@ -85,19 +85,6 @@ plotDEXSeq(drx1, "ENSG00000198216.11", splicing = TRUE, legend=TRUE, cex.axis=1.
 save(drx1, file = "/t1-data/user/aangeles/fastaq_files/revisedcounts2/iPSC_Neuron.Rdata")
 dev.off()
 
-dxd2<-dxd[grep("ENSG00000007402", rownames(dxd)), ]
-dim(dxd2)
-dxd2=estimateDispersions(dxd2, BPPARAM=MulticoreParam(workers=16))
-dxd2=testForDEU(dxd2, BPPARAM=MulticoreParam(workers=16))
-dxd2=estimateExonFoldChanges(dxd2, fitExpToVar="condition", BPPARAM=MulticoreParam(workers=16))
-drx1=DEXSeqResults(dxd2)
-head(drx1)
-write.table(drx1, file="/t1-data/user/aangeles/fastaq_files/revisedcounts2/test_DEU_ENSG00000007402.txt", sep="\t", quote=F, row.names = TRUE, col.names = TRUE)
-pdf("CACNA2D2_DEXSeq.pdf")
-plotDEXSeq(drx1, "ENSG00000007402.11", splicing = TRUE, legend=TRUE, cex.axis=1.2, cex=1.3, lwd=2 )
-save(drx1, file = "/t1-data/user/aangeles/fastaq_files/revisedcounts2/iPSC_Neuron.Rdata")
-dev.off()
-
 dxd2<-dxd[grep("ENSG00000157445", rownames(dxd)), ]
 dim(dxd2)
 dxd2=estimateDispersions(dxd2, BPPARAM=MulticoreParam(workers=16))
