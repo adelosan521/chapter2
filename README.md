@@ -5,3 +5,5 @@ The programming code for the computational pipeline used to pre-process raw sequ
 The programming code for the computational pipeline used to pre-process raw sequencing data for DEXSEQ is the "DEXSEQ_initial_processing" script. The code for running DEXSEQ is contained in the "DEXSEQ_analyses" script.
 
 Finally, the programming code for running MAJIQ and VOILA is contained in the "majiq" script.
+
+Contact: Alejandro De Los Angeles (adelosan@gmail.com)
