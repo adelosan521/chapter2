@@ -1,3 +1,5 @@
+##This code uses Majiq to build and analyze GFF3 files from Wilfried Haerty and then uses Voila to view and dump the results to a tsv file.
+
 ##Majiq
 ##Used GFF3 from Wilfried Haerty ("untar" the following file: Talon_minID90_N5K3_purged_filtered_gencode_renamed_validated_NoSequins.gff.tar.gz)
 
