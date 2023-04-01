@@ -1,3 +1,5 @@
+##This code uses the DESeq2 library to analyze gene expression data from two conditions, iPSC (hiPSC data) and iPSC-neuron (hiPSC-derived neurons). It additionally contains code for performing a Principal Component Analysis (PCA) and generating plots for individual genes (in this case, the different VGCC subunits).
+
 library( "DESeq2" )
 library(ggplot2)
 setwd("/t1-data/user/aangeles/fastaq_files/DESEQ")
@@ -27,27 +29,6 @@ pdf("PCA_DESeq_ggplot2.pdf")
 library(ggfortify)
 autoplot(pcaResult, data = meta, colour = 'type')
 dev.off()
-
-###Heatmap Analysis (taken from https://informatics.fas.harvard.edu/differential-expression-with-deseq2-mouse-immune-cells.html)
-###The following code was used:
-
-rld <- rlogTransformation(dds, blind=TRUE)
-rld_mat <- assay(rld)
-rld_cor <- cor(rld_mat)    ## cor() is a base R function
-head(rld_cor) 
-pheatmap(rld_cor)
-###Generate MA Plot
-dds2 <- DESeq(dds)
-result <- results(dds2, contrast=c('type', 'iPSC', 'iPSC-neuron'))
-head(result)
-plotMA(result, alpha = .05, main=paste0('Condition: iPSC vs. iPSC-neurons'), ylim=c(-5,5))
-List of top 250 up-regulated and top 250 down-regulated genes, sorted by p-value (taken from https://informatics.fas.harvard.edu/differential-expression-with-deseq2-mouse-immune-cells.html)
-n = 250 
-resOrdered <- result[order(result$padj),]
-topResults <- rbind( resOrdered[ resOrdered[,'log2FoldChange'] > 0, ][1:n,],
-                     +                      resOrdered[ resOrdered[,'log2FoldChange'] < 0, ][n:1,] )
-topResults[c(1:5,(2*n-4):(2*n)), c('baseMean','log2FoldChange','padj')]  #print results for top and bottom 5 genes
-write.table(topResults, file="topResults_neuron.txt", sep="\t", quote=F, col.names = TRUE, row.names = TRUE)
 
 ###Export DESEQ2 results to table:
 
