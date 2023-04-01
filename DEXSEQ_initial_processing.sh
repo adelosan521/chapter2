@@ -1,3 +1,5 @@
+##This code is a shell script that takes in an argument from the command line and processes it. It loads modules, creates a variable of the file without the _1. fastq and directory path, trims adapters from raw sequencing data FASTQ files using Trim Galore, generates FastQC reports from trimmed adapter files, aligns trimmed adapter files to genome using HISAT2 and generate BAM files. Additionally it deletes trimmed adapter files after HISAT2 (to save memory). It also generates count files from the BAM files.
+
 #!/bin/sh
 
 ##########################################################################
