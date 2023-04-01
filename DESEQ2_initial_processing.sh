@@ -1,3 +1,5 @@
+##This code is a shell script that takes in an argument from the command line (i.e. the different raw sequencing data files). It loads modules for trim_galore, fastqc, rna-star, and python3-cbrg. Trim_galore is used to trim adaptors. FASTQC is used to conduct quality control analysis of the trimmed adaptor files. RNA-STAR is used for alignment to the genome.
+
 #!/bin/sh
 
 ##########################################################################
