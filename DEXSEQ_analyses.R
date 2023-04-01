@@ -1,3 +1,5 @@
+##This code uses the DEXSeq library to generate normalized counts (for analysis of differential exon usage (DEU)) and plotting of DEU for individual genes.
+
 library(DEXSeq)
 
 setwd("/t1-data/user/aangeles/fastaq_files/revisedcounts2")
