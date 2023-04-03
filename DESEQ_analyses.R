@@ -16,6 +16,17 @@ dds <- estimateSizeFactors(dds)
 temp2<-counts(dds, normalized=TRUE)
 write.table(temp2, file="normalized_counts_reduced.txt", sep="\t", quote=F, row.names = TRUE, col.names = TRUE)
 
+##Identifying number of genes highly expressed in hiPSCs versus hiPSC-derived neurons
+
+res <- results(dds, contrast=c("type","iPSC-neuron","iPSC"))
+# Filter genes based on log2 fold change cutoff
+res_filt <- res[abs(res$log2FoldChange) > 1.5,]
+# Get number of highly expressed genes in each category
+iPSC_high <- sum(res_filt$log2FoldChange < -1.5)
+iPSCN_high <- sum(res_filt$log2FoldChange > 1.5)
+print(paste("Number of genes highly expressed in iPSCs:", iPSC_high))
+print(paste("Number of genes highly expressed in iPSC-neurons:", iPSCN_high))
+
 ###Principal Component Analysis
 ###The following code was used:
 ###GGFORTIFY Method (actual using) (taken from http://rstudio-pubs-static.s3.amazonaws.com/53162_cd16ee63c24747459ccd180f69f07810.html; https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html)
