@@ -1,4 +1,4 @@
-##This code uses the DESeq2 library to analyze gene expression data from two conditions, iPSC (hiPSC data) and iPSC-neuron (hiPSC-derived neurons). It additionally contains code for performing a Principal Component Analysis (PCA) and generating plots for individual genes (in this case, the different VGCC subunits).
+##This code uses the DESeq2 library to analyze gene expression data from two conditions, iPSC (hiPSC data) and iPSC-neuron (hiPSC-derived neurons). It provides code for identifying number of genes highly expressed in hiPSCs or hiPSC-derived neurons. It additionally contains code for performing a Principal Component Analysis (PCA) and generating plots for individual genes (in this case, the different VGCC subunits).
 
 library( "DESeq2" )
 library(ggplot2)
