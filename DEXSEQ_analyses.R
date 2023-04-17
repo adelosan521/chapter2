@@ -71,7 +71,7 @@ plotDEXSeq(drx1, "ENSG00000151067", splicing = TRUE, legend=TRUE, cex.axis=1.2, 
 save(drx1, file = "/t1-data/user/aangeles/fastaq_files/revisedcounts2/iPSC_Neuron.Rdata")
 dev.off()
 
-## Repeat of lines 40 - 72 for other genes indicated below (for example line 76 - 87 is for CACNA1D (ENSG00000157388))
+## Repeat for other VGCC subunit genes. Apply adapted versions of lines 40 - 72 (CACNA1C) for other genes indicated below. For example line 76 - 87 is for CACNA1D (ENSG00000157388))
 
 dxd2<-dxd[grep("ENSG00000157388", rownames(dxd)), ]
 dim(dxd2)
