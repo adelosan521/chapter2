@@ -66,7 +66,7 @@ write.csv(as.data.frame(resOrdered),
 (from https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#exporting-results-to-csv-files)
 
 ###Plot Analysis of Single Genes
-###The following code was used:
+###The following code was used to make plots of each individual VGCC subunit gene below.
 
 d<-plotCounts(dds, gene = "ENSG00000141837.19", intgroup='type', returnData=TRUE)
 ggplot(d, aes(x=condition, y=count)) + 
