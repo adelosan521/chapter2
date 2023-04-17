@@ -1,19 +1,37 @@
 ##This code uses the DESeq2 library to analyze gene expression data from two conditions, iPSC (hiPSC data) and iPSC-neuron (hiPSC-derived neurons). It provides code for identifying number of genes highly expressed in hiPSCs or hiPSC-derived neurons. It additionally contains code for performing a Principal Component Analysis (PCA) and generating plots for individual genes (in this case, the different VGCC subunits).
 
+## Load the required libraries
 library( "DESeq2" )
 library(ggplot2)
+
+## Set the working directory
 setwd("/t1-data/user/aangeles/fastaq_files/DESEQ")
+
+## Read the expression matrix (countsTable) and sample information (sampleInfo) 
 countsTable<-read.delim("name_output_expression_matrix_full.out", header=T, row.names=1)
 countData<-matrix(countsTable)
 sampleInfo<-read.csv("DESEQ_samples_flipped.csv", header=T)
+
+## Attach sample information to the current environment
 attach(sampleInfo)
+
+## Create a metadata data.frame with sample names and conditions
 meta<-data.frame(row.names=colnames(countsTable), type=factor(condition))
+
+## Create a DESeqDataSet object from the count data and metadata
 dds<-DESeqDataSetFromMatrix(countData=countsTable,meta,formula(~type))
-#removal of all entries with 0 counts
+
+## Removal of all entries with 0 counts
 idx <- which(rowSums(counts(dds)) > 0)
 dds <- dds[idx,]
+
+## Estimate size factors for normalization
 dds <- estimateSizeFactors(dds)
+
+## Obtain normalized counts
 temp2<-counts(dds, normalized=TRUE)
+
+## Save normalized counts to a file
 write.table(temp2, file="normalized_counts_reduced.txt", sep="\t", quote=F, row.names = TRUE, col.names = TRUE)
 
 ##Identifying number of genes highly expressed in hiPSCs versus hiPSC-derived neurons
