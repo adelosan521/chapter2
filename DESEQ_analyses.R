@@ -28,6 +28,9 @@ dds <- dds[idx,]
 ## Estimate size factors for normalization
 dds <- estimateSizeFactors(dds)
 
+## run DESEQ2 analysis
+dds <- DESEQ(dds)
+
 ## Obtain normalized counts
 temp2<-counts(dds, normalized=TRUE)
 
@@ -35,13 +38,14 @@ temp2<-counts(dds, normalized=TRUE)
 write.table(temp2, file="normalized_counts_reduced.txt", sep="\t", quote=F, row.names = TRUE, col.names = TRUE)
 
 ##Identifying number of genes highly expressed in hiPSCs versus hiPSC-derived neurons
-
 res <- results(dds, contrast=c("type","iPSC-neuron","iPSC"))
+
 # Filter genes based on log2 fold change cutoff
-res_filt <- res[abs(res$log2FoldChange) > 1.5,]
+res_filt <- res[!is.na(res$log2FoldChange) & !is.na(res$padj) & abs(res$log2FoldChange) > 1.5 & res$padj < 0.05,]
+
 # Get number of highly expressed genes in each category
-iPSC_high <- sum(res_filt$log2FoldChange < -1.5)
-iPSCN_high <- sum(res_filt$log2FoldChange > 1.5)
+iPSC_high <- sum(res_filt$log2FoldChange < -1.5 & res_filt$padj < 0.05)
+iPSCN_high <- sum(res_filt$log2FoldChange > 1.5 & res_filt$padj < 0.05)
 print(paste("Number of genes highly expressed in iPSCs:", iPSC_high))
 print(paste("Number of genes highly expressed in iPSC-neurons:", iPSCN_high))
 
