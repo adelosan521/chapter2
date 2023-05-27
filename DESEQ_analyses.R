@@ -29,7 +29,7 @@ dds <- dds[idx,]
 dds <- estimateSizeFactors(dds)
 
 ## run DESEQ2 analysis
-dds <- DESEQ(dds)
+dds <- DESeq(dds)
 
 ## Obtain normalized counts
 temp2<-counts(dds, normalized=TRUE)
